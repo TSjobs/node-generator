@@ -43,8 +43,19 @@ function load_template(name) {
   return fs.readFileSync(path.join(__dirname, '..', 'templates', name), 'utf-8');
 }
 
-var index = load_template('js/routes/index.js');
-var users = load_template('js/routes/users.js');
+// load templates
+var routesIndex = load_template('js/routes/index.js');
+var routesUsers = load_template('js/routes/users.js');
+
+var configDatabase = load_template('/js/config/database.json');
+var configDevelopment = load_template('/js/config/development.js');
+var configGlobal = load_template('/js/config/global.js');
+var configProduction = load_template('/js/config/production.js');
+
+var controllersUsers = load_template('js/controllers/users.js');
+
+var modelsUsers = load_template('js/models/users.js');
+
 
 /// css
 
@@ -113,9 +124,26 @@ function createApplicationAt(path) {
       }
     });
 
+    mkdir(path + '/config', function() {
+      write(path + '/config/database.json', configDatabase);
+      write(path + '/config/development.js', configDevelopment);
+      write(path + '/config/global.js', configGlobal);
+      write(path + '/config/production.js', configProduction);
+    });
+
+    mkdir(path + '/controllers', function() {
+      write(path + '/controllers/users.js', controllersUsers);
+    });
+
+    mkdir(path + '/models', function() {
+      write(path + '/models/users.js', modelsUsers);
+    });
+
+
+
     mkdir(path + '/routes', function(){
-      write(path + '/routes/index.js', index);
-      write(path + '/routes/users.js', users);
+      write(path + '/routes/index.js', routesIndex);
+      write(path + '/routes/users.js', routesUsers);
     });
 
     mkdir(path + '/views', function(){
@@ -167,7 +195,9 @@ function createApplicationAt(path) {
           'morgan': '~1.0.0',
           'cookie-parser': '~1.0.1',
           'body-parser': '~1.0.0',
-          'debug': '~0.7.4'
+          'debug': '~0.7.4',
+          'mocha': '1.19.0',
+          'mongoose': '3.8.11'
       }
     }
 
