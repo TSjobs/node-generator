@@ -50,6 +50,7 @@ var configDatabase = load_template('/js/config/database.json');
 var configDevelopment = load_template('/js/config/development.js');
 var configGlobal = load_template('/js/config/global.js');
 var configProduction = load_template('/js/config/production.js');
+var configMongo = load_template('/js/config/mongo.js');
 
 var controllersUsers = load_template('js/controllers/users.js');
 
@@ -128,6 +129,7 @@ function createApplicationAt(path) {
       write(path + '/config/development.js', configDevelopment);
       write(path + '/config/global.js', configGlobal);
       write(path + '/config/production.js', configProduction);
+      write(path + '/config/mongo.js', configMongo);
     });
 
     mkdir(path + '/controllers', function() {
