@@ -6,10 +6,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 
-var usersRouter = require('../routes/users');
+var router = require('../routes/index');
 
 app.use(logger('dev'));
-app.use('/', usersRouter);
+
+// view engine setup
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'jade');
+
+app.use('/', router);
 
 // catch 404 error
 app.use(function(req, res, next) {

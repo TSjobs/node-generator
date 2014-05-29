@@ -45,7 +45,6 @@ function load_template(name) {
 
 // load templates
 var routesIndex = load_template('js/routes/index.js');
-var routesUsers = load_template('js/routes/users.js');
 
 var configDatabase = load_template('/js/config/database.json');
 var configDevelopment = load_template('/js/config/development.js');
@@ -143,7 +142,6 @@ function createApplicationAt(path) {
 
     mkdir(path + '/routes', function(){
       write(path + '/routes/index.js', routesIndex);
-      write(path + '/routes/users.js', routesUsers);
     });
 
     mkdir(path + '/views', function(){
