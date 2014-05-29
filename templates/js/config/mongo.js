@@ -28,3 +28,5 @@ db.on('open', function(err) {
 db.on('disconnected', function() {
     console.log(new Date() + ' ' + app.get('env') + ' DB DISCONNECTED');
 });
+
+module.exports = db;
