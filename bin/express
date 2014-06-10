@@ -67,6 +67,8 @@ var compass = fs.readFileSync(__dirname + '/../templates/css/style.scss', 'utf-8
 var app = fs.readFileSync(__dirname + '/../templates/js/app.js', 'utf-8');
 var www = fs.readFileSync(__dirname + '/../templates/js/www', 'utf-8');
 
+var readme = fs.readFileSync(__dirname + '/../templates/README.md', 'utf-8');
+
 // Generate application
 
 (function createApplication(path) {
@@ -230,6 +232,7 @@ function createApplicationAt(path) {
 
     write(path + '/package.json', JSON.stringify(pkg, null, 2));
     write(path + '/app.js', app);
+    write(path + '/README.md', readme);
     mkdir(path + '/bin', function(){
       www = www.replace('{name}', app_name);
       write(path + '/bin/www', www, 0755);
