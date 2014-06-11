@@ -2,8 +2,8 @@
 
 
 
-    $ npm install -g express-generator
-    $ express /tmp/foo && cd /tmp/foo
+    $ sudo npm install -g npm install https://github.com/townsquared/node-generator/blob/master/ts-node-generator-0.0.1.tgz?raw=true
+    $ ts-express /tmp/foo && cd /tmp/foo
 
  Install dependencies:
 
