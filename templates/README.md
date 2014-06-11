@@ -16,6 +16,12 @@ To start the server:
 
     npm start
 
+## Run Tests
+
+To run the sample tests included:
+
+    npm test
+
 ## Directory Structure
 
 Your code is divided into following directories:
