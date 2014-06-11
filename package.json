@@ -8,7 +8,7 @@
     "mkdirp": "0.3.5"
   },
   "keywords": [
-    "express",
+    "ts-express",
     "framework",
     "sinatra",
     "web",
@@ -21,7 +21,7 @@
   "repository": "git://github.com/townsquared/node-generator",
   "main": "bin/ts-express",
   "bin": {
-    "express": "./bin/ts-express"
+    "ts-express": "./bin/ts-express"
   },
   "engines": {
     "node": ">= 0.8.0"
