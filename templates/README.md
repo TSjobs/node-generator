@@ -48,6 +48,13 @@ Your code is divided into following directories:
         error.jade
         index.jade
         layout.jade
+    /tests
+        /acceptance
+        /controllers
+        /routes
+            users.js -- defines database fixture setup and tear down and tests for sample routes
+        /seeds
+            users.json -- data to be included in database fixture for testing
     app.js -- imports global configuration and calls config file based on detected environment
     package.json
     README.md
