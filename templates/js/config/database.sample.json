@@ -1,0 +1,5 @@
+{
+	"development": "mongodb://user:password@host/database",
+	"production": "",
+	"test": "mongodb://user:password@host/database"
+}

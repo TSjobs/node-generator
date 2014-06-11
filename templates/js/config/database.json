@@ -1,5 +1,0 @@
-{
-	"development": "mongodb://localhost/program",
-	"production": "",
-	"test": "mongodb://localhost/program_test"
-}

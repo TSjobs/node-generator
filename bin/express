@@ -46,7 +46,7 @@ function load_template(name) {
 // load templates
 var routesIndex = load_template('js/routes/index.js');
 
-var configDatabase = load_template('/js/config/database.json');
+var configDatabase = load_template('/js/config/database.sample.json');
 var configDevelopment = load_template('/js/config/development.js');
 var configGlobal = load_template('/js/config/global.js');
 var configProduction = load_template('/js/config/production.js');
@@ -105,9 +105,13 @@ function createApplicationAt(path) {
     console.log();
     console.log('   install dependencies:');
     console.log('     $ cd %s && npm install', path);
+    console.log('     $ cp config/database.sample.json config/database.json');
     console.log();
     console.log('   run the app:');
-    console.log('     $ DEBUG=' + app_name + ' ./bin/www');
+    console.log('     $ npm start');
+    console.log();
+    console.log('   run the tests:');
+    console.log('     $ npm test');
     console.log();
   });
 
@@ -132,7 +136,7 @@ function createApplicationAt(path) {
     });
 
     mkdir(path + '/config', function() {
-      write(path + '/config/database.json', configDatabase);
+      write(path + '/config/database.sample.json', configDatabase);
       write(path + '/config/development.js', configDevelopment);
       write(path + '/config/global.js', configGlobal);
       write(path + '/config/production.js', configProduction);
