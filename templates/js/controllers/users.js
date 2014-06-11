@@ -6,7 +6,7 @@ var Users = require('../models/users');
 
 exports.create = function(req, res) {
 	new Users({
-			email: 'shahqaan@townsqd.com', 
+			email: 'shahqaan@gmail.com',
 			name: {first: "Shahqaan", last: "Qasim"}
 		}).save(function(err, item) {
 			if (err) res.send(err);

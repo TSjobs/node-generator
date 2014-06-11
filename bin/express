@@ -51,10 +51,15 @@ var configDevelopment = load_template('/js/config/development.js');
 var configGlobal = load_template('/js/config/global.js');
 var configProduction = load_template('/js/config/production.js');
 var configMongo = load_template('/js/config/mongo.js');
+var configTest = load_template('/js/config/test.js');
 
 var controllersUsers = load_template('js/controllers/users.js');
 
 var modelsUsers = load_template('js/models/users.js');
+
+
+var testRoutesUsers = load_template('js/tests/routes/users.js');
+var testSeedsUsers = load_template('js/tests/seeds/users.json');
 
 
 /// css
@@ -132,6 +137,7 @@ function createApplicationAt(path) {
       write(path + '/config/global.js', configGlobal);
       write(path + '/config/production.js', configProduction);
       write(path + '/config/mongo.js', configMongo);
+      write(path + '/config/test.js', configTest);
     });
 
     mkdir(path + '/controllers', function() {
@@ -167,6 +173,17 @@ function createApplicationAt(path) {
       }
     });
 
+
+    mkdir(path + '/tests');
+    mkdir(path + '/tests/acceptance');
+    mkdir(path + '/tests/routes', function() {
+        write(path + '/tests/routes/users.js', testRoutesUsers);
+    });
+    mkdir(path + '/tests/unit');
+    mkdir(path + '/tests/seeds', function() {
+        write(path + '/tests/seeds/users.json', testSeedsUsers);
+    });
+
     // CSS Engine support
     switch (program.css) {
       case 'less':
@@ -190,7 +207,10 @@ function createApplicationAt(path) {
         name: app_name
       , version: '0.0.1'
       , private: true
-      , scripts: { start: 'node ./bin/www' }
+      , scripts: {
+            start: 'node ./bin/www',
+            test: 'node ./node_modules/mocha/bin/mocha tests --recursive'
+        }
       , dependencies: {
           'express': '~4.2.0',
           'static-favicon': '~1.0.0',
@@ -199,7 +219,9 @@ function createApplicationAt(path) {
           'body-parser': '~1.0.0',
           'debug': '~0.7.4',
           'mocha': '1.19.0',
-          'mongoose': '3.8.11'
+          'mongoose': '3.8.11',
+          'async': '0.9.0',
+          'supertest': '0.13.0'
       }
     }
 

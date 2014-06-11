@@ -1,5 +1,5 @@
 {
 	"development": "mongodb://localhost/program",
 	"production": "",
-	"test": ""
+	"test": "mongodb://localhost/program_test"
 }
