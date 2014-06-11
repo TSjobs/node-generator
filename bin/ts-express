@@ -43,8 +43,24 @@ function load_template(name) {
   return fs.readFileSync(path.join(__dirname, '..', 'templates', name), 'utf-8');
 }
 
-var index = load_template('js/routes/index.js');
-var users = load_template('js/routes/users.js');
+// load templates
+var routesIndex = load_template('js/routes/index.js');
+
+var configDatabase = load_template('/js/config/database.sample.json');
+var configDevelopment = load_template('/js/config/development.js');
+var configGlobal = load_template('/js/config/global.js');
+var configProduction = load_template('/js/config/production.js');
+var configMongo = load_template('/js/config/mongo.js');
+var configTest = load_template('/js/config/test.js');
+
+var controllersUsers = load_template('js/controllers/users.js');
+
+var modelsUsers = load_template('js/models/users.js');
+
+
+var testRoutesUsers = load_template('js/tests/routes/users.js');
+var testSeedsUsers = load_template('js/tests/seeds/users.json');
+
 
 /// css
 
@@ -55,6 +71,8 @@ var compass = fs.readFileSync(__dirname + '/../templates/css/style.scss', 'utf-8
 
 var app = fs.readFileSync(__dirname + '/../templates/js/app.js', 'utf-8');
 var www = fs.readFileSync(__dirname + '/../templates/js/www', 'utf-8');
+
+var readme = fs.readFileSync(__dirname + '/../templates/README.md', 'utf-8');
 
 // Generate application
 
@@ -87,9 +105,13 @@ function createApplicationAt(path) {
     console.log();
     console.log('   install dependencies:');
     console.log('     $ cd %s && npm install', path);
+    console.log('     $ cp config/database.sample.json config/database.json');
     console.log();
     console.log('   run the app:');
-    console.log('     $ DEBUG=' + app_name + ' ./bin/www');
+    console.log('     $ npm start');
+    console.log();
+    console.log('   run the tests:');
+    console.log('     $ npm test');
     console.log();
   });
 
@@ -113,9 +135,27 @@ function createApplicationAt(path) {
       }
     });
 
+    mkdir(path + '/config', function() {
+      write(path + '/config/database.sample.json', configDatabase);
+      write(path + '/config/development.js', configDevelopment);
+      write(path + '/config/global.js', configGlobal);
+      write(path + '/config/production.js', configProduction);
+      write(path + '/config/mongo.js', configMongo);
+      write(path + '/config/test.js', configTest);
+    });
+
+    mkdir(path + '/controllers', function() {
+      write(path + '/controllers/users.js', controllersUsers);
+    });
+
+    mkdir(path + '/models', function() {
+      write(path + '/models/users.js', modelsUsers);
+    });
+
+
+
     mkdir(path + '/routes', function(){
-      write(path + '/routes/index.js', index);
-      write(path + '/routes/users.js', users);
+      write(path + '/routes/index.js', routesIndex);
     });
 
     mkdir(path + '/views', function(){
@@ -135,6 +175,17 @@ function createApplicationAt(path) {
           break;
 
       }
+    });
+
+
+    mkdir(path + '/tests');
+    mkdir(path + '/tests/acceptance');
+    mkdir(path + '/tests/routes', function() {
+        write(path + '/tests/routes/users.js', testRoutesUsers);
+    });
+    mkdir(path + '/tests/unit');
+    mkdir(path + '/tests/seeds', function() {
+        write(path + '/tests/seeds/users.json', testSeedsUsers);
     });
 
     // CSS Engine support
@@ -160,14 +211,21 @@ function createApplicationAt(path) {
         name: app_name
       , version: '0.0.1'
       , private: true
-      , scripts: { start: 'node ./bin/www' }
+      , scripts: {
+            start: 'node ./bin/www',
+            test: 'node ./node_modules/mocha/bin/mocha tests --recursive'
+        }
       , dependencies: {
           'express': '~4.2.0',
           'static-favicon': '~1.0.0',
           'morgan': '~1.0.0',
           'cookie-parser': '~1.0.1',
           'body-parser': '~1.0.0',
-          'debug': '~0.7.4'
+          'debug': '~0.7.4',
+          'mocha': '1.19.0',
+          'mongoose': '3.8.11',
+          'async': '0.9.0',
+          'supertest': '0.13.0'
       }
     }
 
@@ -200,6 +258,7 @@ function createApplicationAt(path) {
 
     write(path + '/package.json', JSON.stringify(pkg, null, 2));
     write(path + '/app.js', app);
+    write(path + '/README.md', readme);
     mkdir(path + '/bin', function(){
       www = www.replace('{name}', app_name);
       write(path + '/bin/www', www, 0755);
