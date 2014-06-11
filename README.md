@@ -1,9 +1,3 @@
-[![express logo](http://f.cl.ly/items/0V2S1n0K1i3y1c122g04/Screen%20Shot%202012-04-11%20at%209.59.42%20AM.png)](http://expressjs.com/)
-
-  Fast, unopinionated, minimalist web framework for [node](http://nodejs.org).
-
-  [![Gittip](http://img.shields.io/gittip/visionmedia.png)](https://www.gittip.com/visionmedia/)
-
 ## Quick Start
 
  The quickest way to get started with express is to utilize the executable `express(1)` to generate an application as shown below:
