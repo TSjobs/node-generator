@@ -2,7 +2,7 @@
 
 Install generator:
 
-    $ sudo npm install -g https://github.com/townsquared/node-generator/blob/master/ts-node-generator-0.0.1.tgz?raw=true
+    $ sudo npm install -g https://github.com/townsquared/node-generator/blob/master/ts-node-generator-0.0.2.tgz?raw=true
 
 Create application:
 
@@ -18,4 +18,6 @@ Rock and Roll
 
 # Generate generator executable
 
+Use the following command to pack the generator app:
 
+    $ npm pack
