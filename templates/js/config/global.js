@@ -14,6 +14,8 @@ app.use(logger('dev'));
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'jade');
 
+app.use(bodyParser());
+
 app.use('/', router);
 
 // catch 404 error
